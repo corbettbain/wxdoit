@@ -48,6 +48,19 @@
         <!-- 此处可以可以配置成*.do，对应struts的后缀习惯 -->
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+    <servlet>
+    	<servlet-name>AccessToken</servlet-name>
+    	<servlet-class>com.cn.hnust.accesstoken.AccessToken</servlet-class>
+    	<init-param>
+			<param-name>appid</param-name>
+			<param-value>wx81cbb695ae6aed06</param-value>
+		</init-param>
+		<init-param>
+			<param-name>secret</param-name>
+			<param-value>66ff006c5aff15c76ed59c779ce31f9b</param-value>
+		</init-param>
+		<load-on-startup>0</load-on-startup>
+    </servlet>
     <welcome-file-list>
         <welcome-file>/index.jsp</welcome-file>
     </welcome-file-list>
