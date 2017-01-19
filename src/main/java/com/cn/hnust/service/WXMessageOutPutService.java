@@ -15,3 +15,4 @@ public interface WXMessageOutPutService {
 
 	String outPutToWx(HttpServletRequest request) throws IOException, DocumentException;
 }
+
