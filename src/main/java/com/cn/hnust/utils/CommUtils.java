@@ -12,7 +12,7 @@ import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import com.cn.hnust.pojo.Weather;
+import com.cn.hnust.pojo.weather.Weather;
 
 /**
  * @author zn

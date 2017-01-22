@@ -1,7 +1,5 @@
 package com.cn.hnust.pojo;
 
-import java.util.Date;
-
 /**
 * @author zn
 * @version 创建时间：2017年1月16日 下午10:04:05

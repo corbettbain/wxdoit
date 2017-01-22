@@ -11,7 +11,7 @@ import org.dom4j.DocumentException;
 import org.springframework.stereotype.Service;
 
 import com.cn.hnust.service.WXMessageOutPutService;
-import com.cn.hnust.service.WXMessageService;
+import com.cn.hnust.service.WeatherService;
 import com.cn.hnust.wxmessages.WxMessagesUtils;
 
 /**
@@ -22,7 +22,7 @@ import com.cn.hnust.wxmessages.WxMessagesUtils;
 public class WXMessageOutPutServiceImpl implements WXMessageOutPutService {
 	
 	@Inject
-	private WXMessageService wXMessageService;
+	private WeatherService wXMessageService;
 
 	@Override
 	public String outPutToWx(HttpServletRequest request) throws IOException, DocumentException {

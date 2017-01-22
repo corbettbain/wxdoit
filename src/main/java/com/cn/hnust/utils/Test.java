@@ -14,7 +14,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
+
 import com.alibaba.fastjson.JSONObject;
+import com.cn.hnust.pojo.weather.WeathersForDays;
+import com.cn.hnust.service.WeatherService;
+import com.cn.hnust.service.impl.WeatherServiceImpl;
 
 public class Test {
 	String cityid;
@@ -104,7 +109,13 @@ public class Test {
 		return weekStr;
 	}
 
+	@Inject
+	private WeatherService weatherService;
+	
 	public static void main(String[] args) throws IOException {
-		CommUtils.getWeather("º¼ÖÝ");
+//		CommUtils.getWeather("º¼ÖÝ");
+		WeatherService weatherService = new WeatherServiceImpl();
+		weatherService.getWeather("º¼ÖÝ");
+		
 	}
 }

@@ -1,8 +1,5 @@
 package com.cn.hnust.controller;
 
-import java.util.Date;
-import java.util.Map;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,10 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cn.hnust.service.WXCheckService;
 import com.cn.hnust.service.WXMessageOutPutService;
-import com.cn.hnust.service.WXMessageService;
-import com.cn.hnust.wxmessages.WxMessagesUtils;
 
 /**
  * @author zn
@@ -24,12 +18,9 @@ import com.cn.hnust.wxmessages.WxMessagesUtils;
 @RequestMapping("/wx")
 public class CheckWXController {
 
-	@Inject
-	private WXCheckService wXCheckService;
+//	@Inject
+//	private WXCheckService wXCheckService;
 
-	@Inject
-	private WXMessageService wXMessageService;
-	
 	@Inject
 	private WXMessageOutPutService wXMessageOutPutService;
 
