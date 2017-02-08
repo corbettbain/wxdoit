@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.cn.hnust.pojo.weather.WeathersForDays;
 import com.cn.hnust.service.WeatherService;
 import com.cn.hnust.wxmessages.WxMessagesUtils;
 
@@ -21,6 +22,7 @@ public class WeatherServiceImpl implements WeatherService {
 	@Override
 	public com.cn.hnust.pojo.weather.WeathersForDays getWeather(String city) throws IOException {
 		String results = null;
+		WeathersForDays weathersForDays = null;
 		try {
 //			String s1 = URLEncoder.encode(city, "utf-8");
 			
@@ -35,12 +37,14 @@ public class WeatherServiceImpl implements WeatherService {
 			results = WxMessagesUtils.getUrlData(strUrl, param, method, null);
 			
 			JSONObject weather = JSONObject.parseObject(results);
+			
+			weathersForDays = JSONObject.toJavaObject(weather.getJSONObject("result"), WeathersForDays.class);
 			System.out.println(weather);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace(); 
 		}
-		return null;
+		return weathersForDays;
 	}
 
 }

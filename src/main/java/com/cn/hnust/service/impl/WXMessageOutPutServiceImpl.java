@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.dom4j.DocumentException;
 import org.springframework.stereotype.Service;
 
+import com.cn.hnust.pojo.weather.WeathersForDays;
 import com.cn.hnust.service.WXMessageOutPutService;
 import com.cn.hnust.service.WeatherService;
 import com.cn.hnust.wxmessages.WxMessagesUtils;
@@ -39,16 +40,24 @@ public class WXMessageOutPutServiceImpl implements WXMessageOutPutService {
 			int suffx = content.indexOf("天气");
 			if (suffx>0) {
 				String addr = content.substring(0, content.length()-2);
-				wXMessageService.getWeather(addr);
-			}
-
-			textMessage.setFromUserName(toUserName);
-			textMessage.setToUserName(fromUserName);
-			textMessage.setMsgType("text");
-			textMessage.setContent("您发送的消息是" + content + "(-- 消息来自周宁爱的抱抱)");
-			textMessage.setCreateTime(new Date().getTime());
-			message = WxMessagesUtils.textToXml(textMessage);
-			System.out.println(message);
+				WeathersForDays weathersForDays = wXMessageService.getWeather(addr);
+				
+				textMessage.setFromUserName(toUserName);
+				textMessage.setToUserName(fromUserName);
+				textMessage.setMsgType("text");
+				textMessage.setContent(weathersForDays.getCity()+":"+weathersForDays.getWeather()+",风力:"+weathersForDays.getWindpower());
+				textMessage.setCreateTime(new Date().getTime());
+				message = WxMessagesUtils.textToXml(textMessage);
+				System.out.println(message);
+			}else {
+				textMessage.setFromUserName(toUserName);
+				textMessage.setToUserName(fromUserName);
+				textMessage.setMsgType("text");
+				textMessage.setContent("您发送的消息是" + content + "(-- 消息来自周宁爱的抱抱)");
+				textMessage.setCreateTime(new Date().getTime());
+				message = WxMessagesUtils.textToXml(textMessage);
+				System.out.println(message);
+			}		
 		}
 		return message;
 	}

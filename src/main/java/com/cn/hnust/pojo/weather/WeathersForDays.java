@@ -64,7 +64,7 @@ public class WeathersForDays {
 	/**
 	 *@param 空气指数
 	 */
-	private List<Aqi> aqi;
+	private Aqi aqi;
 
 	
 	/**
@@ -231,7 +231,7 @@ public class WeathersForDays {
 	 * 获取 aqi
 	 * @return the aqi aqi
 	 */
-	public List<Aqi> getAqi() {
+	public Aqi getAqi() {
 		return aqi;
 	}
 
@@ -239,7 +239,7 @@ public class WeathersForDays {
 	 * 设置 aqi
 	 * @param aqi the aqi to set aqi
 	 */
-	public void setAqi(List<Aqi> aqi) {
+	public void setAqi(Aqi aqi) {
 		this.aqi = aqi;
 	}
 
