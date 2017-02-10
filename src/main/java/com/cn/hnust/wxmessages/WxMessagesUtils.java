@@ -14,13 +14,18 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.codehaus.jackson.map.util.JSONPObject;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import com.alibaba.fastjson.JSONObject;
+import com.cn.hnust.pojo.weather.WeatherResult;
 import com.thoughtworks.xstream.XStream;
 
 /**
@@ -48,7 +53,37 @@ public class WxMessagesUtils {
 	 */
 	public static Boolean InstanceFollowRedirects = false;
 
+	public static final String TEXT = "text";
+	public static final String IMAGE = "image";
+	public static final String VOICE = "voice";
+	public static final String VIDEO = "video";
+	public static final String SHORT_VIDEO = "shortvideo";
+	public static final String LOCATION = "location";
+	public static final String LINK = "link";
+	public static final String EVENT = "event";
+	public static final String SUBSCRIBE = "subscribe";
+	public static final String SCAN = "SCAN";
+	public static final String UNSUBSCRIBE = "unsubscribe";
 	
+	/**
+	 * 极速数据的appkey
+	 */
+	public static final String JISU_APP_KEY = "appkey";
+	public static final String JISU_APP_KEY_VALUE = "a5ec7b9e7a5c3e2a";
+	
+	/**
+	 * method 类型
+	 */
+	public static final String METHOD_GET = "GET";
+	public static final String METHOD_POST = "POST";
+	
+	/**
+	 * 
+	 * @param request
+	 * @return
+	 * @throws IOException
+	 * @throws DocumentException
+	 */
 	
 	public static Map<String, String> messageToMap(HttpServletRequest request) throws IOException, DocumentException {
 
@@ -98,7 +133,7 @@ public class WxMessagesUtils {
 	 * @return rs (String Data)
 	 * @throws IOException
 	 */
-	public static String getUrlData(String strUrl, Map<String, String> param, String method,
+	public static String getUrlData(String strUrl, Map<String, Object> param, String method,
 			Map<String, String> property) throws IOException {
 		HttpURLConnection connection = null;
 		BufferedReader read = null;
@@ -182,9 +217,9 @@ public class WxMessagesUtils {
 	}
 
 	// 将map型转为请求参数型
-	public static String urlencode(Map<String, String> data) {
+	public static String urlencode(Map<String, Object> param) {
 		StringBuilder sb = new StringBuilder();
-		for (Map.Entry i : data.entrySet()) {
+		for (Map.Entry i : param.entrySet()) {
 			try {
 				sb.append(i.getKey()).append("=").append(URLEncoder.encode(i.getValue() + "", "UTF-8")).append("&");
 			} catch (UnsupportedEncodingException e) {
@@ -192,5 +227,11 @@ public class WxMessagesUtils {
 			}
 		}
 		return sb.toString();
+	}
+	
+	
+	public static <T> Object jsonObjectToJavaBean(String results,Class<T> tClass){
+		JSONObject weather = JSONObject.parseObject(results); 
+		return JSONObject.toJavaObject(weather,tClass);
 	}
 }

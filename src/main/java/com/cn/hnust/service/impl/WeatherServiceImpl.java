@@ -1,14 +1,13 @@
 package com.cn.hnust.service.impl;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.cn.hnust.pojo.weather.WeathersForDays;
+import com.cn.hnust.pojo.weather.WeatherResult;
 import com.cn.hnust.service.WeatherService;
 import com.cn.hnust.wxmessages.WxMessagesUtils;
 
@@ -20,15 +19,15 @@ import com.cn.hnust.wxmessages.WxMessagesUtils;
 public class WeatherServiceImpl implements WeatherService {
 
 	@Override
-	public com.cn.hnust.pojo.weather.WeathersForDays getWeather(String city) throws IOException {
+	public WeatherResult getWeather(String city) throws IOException {
 		String results = null;
-		WeathersForDays weathersForDays = null;
+		WeatherResult weatherResult = null;
 		try {
 //			String s1 = URLEncoder.encode(city, "utf-8");
 			
 			String strUrl = "http://api.jisuapi.com/weather/query";
 			
-			Map<String, String > param = new HashMap<String, String>();
+			Map<String, Object > param = new HashMap<String, Object>();
 			param.put("appkey", "a5ec7b9e7a5c3e2a");
 			param.put("city", city);
 			
@@ -38,13 +37,13 @@ public class WeatherServiceImpl implements WeatherService {
 			
 			JSONObject weather = JSONObject.parseObject(results);
 			
-			weathersForDays = JSONObject.toJavaObject(weather.getJSONObject("result"), WeathersForDays.class);
+			weatherResult = JSONObject.toJavaObject(weather, WeatherResult.class);
 			System.out.println(weather);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace(); 
 		}
-		return weathersForDays;
+		return weatherResult;
 	}
 
 }

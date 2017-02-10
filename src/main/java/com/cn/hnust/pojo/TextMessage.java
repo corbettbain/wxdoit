@@ -78,6 +78,15 @@ public class TextMessage {
 		MsgId = msgId;
 	}
 
+	public TextMessage(String toUserName, String fromUserName, String msgType, String content,long createTime){
+		super();
+		ToUserName = fromUserName;
+		FromUserName = toUserName;
+		MsgType = msgType;
+		Content = content;
+		CreateTime = createTime;
+	}
+	
 	@Override
 	public String toString() {
 		return "TextMessage [ToUserName=" + ToUserName + ", FromUserName=" + FromUserName + ", CreateTime=" + CreateTime

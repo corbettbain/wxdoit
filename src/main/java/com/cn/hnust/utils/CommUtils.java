@@ -20,8 +20,6 @@ import com.cn.hnust.pojo.weather.Weather;
  */
 public class CommUtils {
 
-	private static final String WEATHER_URL = "http://wthrcdn.etouch.cn/weather_mini?city=";
-
 	public static String SHAEncodeAnother(String inStr) {
 		if (null == inStr || 0 == inStr.length()) {
 			return null;

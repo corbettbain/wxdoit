@@ -25,7 +25,7 @@ public class AccessToken extends HttpServlet {
 		ThreadAccessToken.appid = getInitParameter("appid");
 		
 		ThreadAccessToken.secret = getInitParameter("secret");
-		logger.info("appid" + ThreadAccessToken.appid + "  " + "secret" + ThreadAccessToken.secret );
+		logger.info("init方法下的------appid" + ThreadAccessToken.appid + "------" + "secret" + ThreadAccessToken.secret );
 		
 		if ("".equals(ThreadAccessToken.appid) && "".equals(ThreadAccessToken.secret)) {
 			logger.error("appid and appsecret configuration error, please check carefully.");
