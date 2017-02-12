@@ -7,7 +7,9 @@ package com.cn.hnust.pojo.joke;
 */
 public class Joke {
 
+	private Integer id;
 	private String content;
+	private String pic;
 	private String addtime;
 	private String url;
 	/**
@@ -53,25 +55,29 @@ public class Joke {
 		this.url = url;
 	}
 	/**
-	 * @param content
-	 * @param addtime
-	 * @param url
+	 * @return the pic
 	 */
-	public Joke(String content, String addtime, String url) {
-		super();
-		this.content = content;
-		this.addtime = addtime;
-		this.url = url;
+	public String getPic() {
+		return pic;
 	}
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	/**
+	 * @param pic the pic to set
 	 */
-	@Override
-	public String toString() {
-		return "Joke [content=" + content + ", addtime=" + addtime + ", url=" + url + "]";
+	public void setPic(String pic) {
+		this.pic = pic;
+	}
+	/**
+	 * @return the id
+	 */
+	public Integer getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
-	public Joke() {
-		// TODO Auto-generated constructor stub
-	}
+	
 }

@@ -9,12 +9,25 @@ import java.util.List;
 */
 public class Jokes {
 
-//	private String total;
-//	private String pagenum;
+	private String total;
+	private String pagenum;
 	private String pagesize;
 	private List<Joke> list;
 	
 	
+	
+	public String getTotal() {
+		return total;
+	}
+	public void setTotal(String total) {
+		this.total = total;
+	}
+	public String getPagenum() {
+		return pagenum;
+	}
+	public void setPagenum(String pagenum) {
+		this.pagenum = pagenum;
+	}
 	/**
 	 * ªÒ»° pagesize
 	 * @return the pagesize pagesize

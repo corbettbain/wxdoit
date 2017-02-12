@@ -80,12 +80,7 @@ public class WXMessageOutPutServiceImpl implements WXMessageOutPutService {
 				textMessage = new TextMessage(toUserName, fromUserName, sendMsgType, wxcontent, createTime);
 				
 			}else if(content.equals("Ð¦»°")){
-				JokeResult jokeResult = jokeService.getJoke();
-				List<Joke> jokes = jokeResult.getResult().getList();
-				wxcontent = "";
-				for (Joke joke : jokes) {
-					wxcontent += joke.getContent()+";";
-				}
+				wxcontent = jokeService.getRandJoke().getContent();
 				textMessage = new TextMessage(toUserName, fromUserName, sendMsgType, wxcontent, createTime);						
 			}else {
 				

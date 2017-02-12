@@ -6,7 +6,7 @@ package com.cn.hnust.pojo.joke;
 */
 public class JokeResult {
 
-	public static final String STRURL = "http://api.jisuapi.com/xiaohua/text";
+	public static final String STRURL = "http://api.jisuapi.com/xiaohua/all";
 	
 	private String status;
 	private String msg;

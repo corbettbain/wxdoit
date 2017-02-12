@@ -2,16 +2,16 @@
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
 	<classPathEntry
-		location="D:\maven_jars\maven_jar\mysql\mysql-connector-java\5.1.30\mysql-connector-java-5.1.30.jar" />
+		location="D:\myFiles\maven_jars\maven_jar\mysql\mysql-connector-java\5.1.30\mysql-connector-java-5.1.30.jar" />
 	<context id="context1">
-		<jdbcConnection connectionURL="jdbc:mysql://192.168.1.10:3306/text_user"
-			driverClass="com.mysql.jdbc.Driver" password="123456" userId="root" />
+		<jdbcConnection connectionURL="jdbc:mysql://127.1.0.0:3306/doit_wx"
+			driverClass="com.mysql.jdbc.Driver" password="root" userId="root" />
 		<javaModelGenerator targetPackage="com.cn.hnust.pojo"
-			targetProject="doit/src/main/java" />
+			targetProject="wxdoit/src/main/java" />
 		<sqlMapGenerator targetPackage="com.cn.hnust.mapping"
-			targetProject="doit/src/main/java" />
+			targetProject="wxdoit/src/main/java" />
 		<javaClientGenerator targetPackage="com.cn.hnust.dao"
-			targetProject="doit/src/main/java" type="XMLMAPPER" />
+			targetProject="wxdoit/src/main/java" type="XMLMAPPER" />
 <!-- 		<table schema="db_35kk8_develop_sql" tableName="activity_limit"> -->
 <!-- 			<columnOverride column="id" property="id" /> -->
 <!-- 			<columnOverride column="main_type" property="mainType" -->
@@ -21,12 +21,11 @@
 <!-- 			<columnOverride column="main_id" property="mainId" /> -->
 <!-- 			<columnOverride column="limit_id" property="limitId" /> -->
 <!-- 		</table> -->
-		<table schema="text_user" tableName="user_t">
-			<columnOverride column="id" property="id" />
-			<columnOverride column="password" property="password"/>
-			<columnOverride column="type" property="type"/>
-			<columnOverride column="age" property="age" />
-
+		<table schema="doit_wx" tableName="joke">
+			<columnOverride column="joke_id" property="id" />
+			<columnOverride column="joke_content" property="content"/>
+			<columnOverride column="joke_pic" property="pic"/>
+			<columnOverride column="joke_addtime" property="addtime"/>
 		</table>
 	</context>
 </generatorConfiguration>

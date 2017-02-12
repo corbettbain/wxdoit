@@ -1,5 +1,6 @@
 package com.cn.hnust.service;
 
+import com.cn.hnust.pojo.joke.Joke;
 import com.cn.hnust.pojo.joke.JokeResult;
 
 /**
@@ -9,5 +10,9 @@ import com.cn.hnust.pojo.joke.JokeResult;
 */
 public interface JokeService {
 
-	JokeResult getJoke();
+	JokeResult getJoke(Integer no);
+	
+	void insertJoke();
+	
+	Joke getRandJoke();
 }
