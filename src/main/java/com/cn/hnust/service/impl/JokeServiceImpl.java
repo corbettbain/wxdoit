@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import com.cn.hnust.dao.IJokeDao;
 import com.cn.hnust.pojo.joke.Joke;
 import com.cn.hnust.pojo.joke.JokeResult;
-import com.cn.hnust.service.JokeService;
 import com.cn.hnust.wxmessages.WxMessagesUtils;
 
 /**
@@ -22,7 +21,7 @@ import com.cn.hnust.wxmessages.WxMessagesUtils;
 * ภเหตร๗
 */
 @Service
-public class JokeServiceImpl implements JokeService {
+public class JokeServiceImpl implements com.cn.hnust.service.joke.JokeService {
 
 	
 	@Inject

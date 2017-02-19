@@ -16,9 +16,9 @@ import com.cn.hnust.pojo.joke.Joke;
 import com.cn.hnust.pojo.joke.JokeResult;
 import com.cn.hnust.pojo.weather.WeatherResult;
 import com.cn.hnust.pojo.weather.WeathersForDays;
-import com.cn.hnust.service.JokeService;
 import com.cn.hnust.service.WXMessageOutPutService;
 import com.cn.hnust.service.WeatherService;
+import com.cn.hnust.service.joke.JokeService;
 import com.cn.hnust.wxmessages.WxMessagesUtils;
 
 /**

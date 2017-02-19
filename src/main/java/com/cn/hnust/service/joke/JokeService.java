@@ -1,4 +1,4 @@
-package com.cn.hnust.service;
+package com.cn.hnust.service.joke;
 
 import com.cn.hnust.pojo.joke.Joke;
 import com.cn.hnust.pojo.joke.JokeResult;
