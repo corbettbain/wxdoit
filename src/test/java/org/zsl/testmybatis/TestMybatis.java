@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.alibaba.fastjson.JSON;
 import com.cn.hnust.pojo.User;
 import com.cn.hnust.service.IUserService;
+import com.cn.hnust.service.joke.impl.GetJoke;
 
 @RunWith(SpringJUnit4ClassRunner.class)     //表示继承了SpringJUnit4ClassRunner类
 @ContextConfiguration(locations = {"classpath:spring-mybatis.xml"})
@@ -22,8 +23,9 @@ public class TestMybatis {
     @Resource
     private IUserService userService = null;
 
+    
     @Inject
-    private com.cn.hnust.service.joke.JokeService jokeService;
+    private GetJoke getJoke;
     
 //  @Before
 //  public void before() {
@@ -41,6 +43,11 @@ public class TestMybatis {
     
     @Test
     public void test2(){
-    	jokeService.insertJoke();
+    	
+    }
+    
+    @Test
+    public void test3(){
+    	System.out.println(getJoke.get(1));
     }
 }

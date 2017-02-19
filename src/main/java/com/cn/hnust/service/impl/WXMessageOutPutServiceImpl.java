@@ -2,7 +2,6 @@ package com.cn.hnust.service.impl;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -12,13 +11,10 @@ import org.dom4j.DocumentException;
 import org.springframework.stereotype.Service;
 
 import com.cn.hnust.pojo.TextMessage;
-import com.cn.hnust.pojo.joke.Joke;
-import com.cn.hnust.pojo.joke.JokeResult;
 import com.cn.hnust.pojo.weather.WeatherResult;
-import com.cn.hnust.pojo.weather.WeathersForDays;
 import com.cn.hnust.service.WXMessageOutPutService;
 import com.cn.hnust.service.WeatherService;
-import com.cn.hnust.service.joke.JokeService;
+import com.cn.hnust.service.joke.impl.GetJoke;
 import com.cn.hnust.wxmessages.WxMessagesUtils;
 
 /**
@@ -32,7 +28,7 @@ public class WXMessageOutPutServiceImpl implements WXMessageOutPutService {
 	private WeatherService wXMessageService;
 	
 	@Inject
-	private JokeService jokeService;
+	private GetJoke getJoke;
 
 	@Override
 	public String outPutToWx(HttpServletRequest request) throws IOException, DocumentException {
@@ -80,7 +76,7 @@ public class WXMessageOutPutServiceImpl implements WXMessageOutPutService {
 				textMessage = new TextMessage(toUserName, fromUserName, sendMsgType, wxcontent, createTime);
 				
 			}else if(content.equals("Ð¦»°")){
-				wxcontent = jokeService.getRandJoke().getContent();
+				wxcontent = getJoke.getRandJoke().getContent();
 				textMessage = new TextMessage(toUserName, fromUserName, sendMsgType, wxcontent, createTime);						
 			}else {
 				
