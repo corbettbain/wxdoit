@@ -1,6 +1,9 @@
 package com.cn.hnust.accesstoken;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.Date;
+
 import org.apache.log4j.Logger;
 
 import com.alibaba.fastjson.JSONObject;
@@ -35,7 +38,7 @@ public class ThreadAccessToken implements Runnable{
 				
 				expires_in = jsonObject.getString("expires_in");
 				
-				logger.info("accessToken:" + accessToken + "expires_in:" + expires_in);
+				logger.info("accessToken:" + accessToken + "----expires_in:" + expires_in + "-----" + LocalDateTime.now());
 				
 				if (accessToken != null) {
 					Thread.sleep((Long.valueOf(expires_in)-200)*1000);

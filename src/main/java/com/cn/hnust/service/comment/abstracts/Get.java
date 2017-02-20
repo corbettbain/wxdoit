@@ -1,11 +1,14 @@
 package com.cn.hnust.service.comment.abstracts;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.cn.hnust.service.comment.GetService;
 
 public abstract class Get<T> implements GetService<T> {
 
+	private T tt;
+	
 	public T get(Object object) {
 		return null;
 	}
@@ -13,11 +16,16 @@ public abstract class Get<T> implements GetService<T> {
 	@Override
 	public T get() {
 		// TODO Auto-generated method stub
-		return null;
+		return tt;
 	}
 	@Override
 	public List<T> getList() {
-		// TODO Auto-generated method stub
-		return null;
+		List<T> list  = new ArrayList<>();
+		list.add(tt);
+		return  list;
+	}
+	
+	public void setT(T t){
+		this.tt = t;
 	}
 }

@@ -15,6 +15,10 @@ import com.cn.hnust.pojo.weather.WeatherResult;
 import com.cn.hnust.service.WXMessageOutPutService;
 import com.cn.hnust.service.WeatherService;
 import com.cn.hnust.service.joke.impl.GetJoke;
+import com.cn.hnust.service.wx.enums.WxSendType;
+import com.cn.hnust.service.wx.msgsend.MessagesSend;
+import com.cn.hnust.service.wx.msgsend.MessagesSendFactpry;
+import com.cn.hnust.service.wx.msgsend.impl.MessagesSendFactpryImpl;
 import com.cn.hnust.wxmessages.WxMessagesUtils;
 
 /**
@@ -41,17 +45,24 @@ public class WXMessageOutPutServiceImpl implements WXMessageOutPutService {
 		String wxcontent = null;
 		String sendMsgType = null;
 		TextMessage textMessage = null;
+		
 		long createTime = new Date().getTime();
-		switch (msgType) {
-		case WxMessagesUtils.TEXT:
-			textMessage = msgTypeByText(content, toUserName, fromUserName,wxcontent,sendMsgType,textMessage,createTime);
-			break;
-		case WxMessagesUtils.EVENT:
-			textMessage = msgTypeByEvent( content, toUserName, fromUserName,map,wxcontent,sendMsgType,textMessage,createTime);
-			break;
-		default:
-			break;
-		}
+		
+		textMessage = new TextMessage(toUserName, fromUserName, sendMsgType, content, createTime);
+//		switch (msgType) {
+//		case WxMessagesUtils.TEXT:
+//			textMessage = msgTypeByText(content, toUserName, fromUserName,wxcontent,sendMsgType,textMessage,createTime);
+//			break;
+//		case WxMessagesUtils.EVENT:
+//			textMessage = msgTypeByEvent( content, toUserName, fromUserName,map,wxcontent,sendMsgType,textMessage,createTime);
+//			break;
+//		default:
+//			break;
+//		}
+		MessagesSendFactpry messagesSendFactpry = new MessagesSendFactpryImpl();
+		
+		MessagesSend messagesSend = (MessagesSend) messagesSendFactpry.createMessage(msgType);
+		textMessage = messagesSend.send(textMessage);
 		message = WxMessagesUtils.textToXml(textMessage);
 		return message;
 	}
