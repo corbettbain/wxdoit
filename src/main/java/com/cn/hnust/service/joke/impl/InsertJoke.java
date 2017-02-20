@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 import com.cn.hnust.dao.IJokeDao;
 import com.cn.hnust.pojo.joke.Joke;
 import com.cn.hnust.pojo.joke.JokeResult;
-import com.cn.hnust.service.comment.abstracts.Insert;
+import com.cn.hnust.service.joke.factory.InsertJokeService;
 @Service
-public class InsertJoke extends Insert {
+public class InsertJoke implements InsertJokeService {
 
 	@Inject
 	private IJokeDao jokeDao;

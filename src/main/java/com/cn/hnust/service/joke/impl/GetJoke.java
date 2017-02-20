@@ -11,15 +11,16 @@ import org.springframework.stereotype.Service;
 import com.cn.hnust.dao.IJokeDao;
 import com.cn.hnust.pojo.joke.Joke;
 import com.cn.hnust.pojo.joke.JokeResult;
-import com.cn.hnust.service.comment.abstracts.Get;
+import com.cn.hnust.service.joke.factory.JokeFactory;
 import com.cn.hnust.wxmessages.WxMessagesUtils;
 
 @Service
-public class GetJoke extends Get<JokeResult> {
+public class GetJoke implements JokeFactory{
 
 	@Inject
 	private IJokeDao jokeDao;
 	
+	@Override
 	public Joke getRandJoke() {
 		
 		return jokeDao.getRandJoke();

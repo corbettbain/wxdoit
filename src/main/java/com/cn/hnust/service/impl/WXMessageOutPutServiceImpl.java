@@ -14,6 +14,7 @@ import com.cn.hnust.pojo.TextMessage;
 import com.cn.hnust.pojo.weather.WeatherResult;
 import com.cn.hnust.service.WXMessageOutPutService;
 import com.cn.hnust.service.WeatherService;
+import com.cn.hnust.service.joke.factory.JokeFactory;
 import com.cn.hnust.service.joke.impl.GetJoke;
 import com.cn.hnust.service.wx.enums.WxSendType;
 import com.cn.hnust.service.wx.msgsend.MessagesSend;
@@ -32,8 +33,11 @@ public class WXMessageOutPutServiceImpl implements WXMessageOutPutService {
 	private WeatherService wXMessageService;
 	
 	@Inject
-	private GetJoke getJoke;
+	private JokeFactory jokeFactory;
 
+	@Inject
+	private MessagesSendFactpry messagesSendFactpry;
+	
 	@Override
 	public String outPutToWx(HttpServletRequest request) throws IOException, DocumentException {
 		Map<String, String> map = WxMessagesUtils.messageToMap(request);
@@ -59,44 +63,13 @@ public class WXMessageOutPutServiceImpl implements WXMessageOutPutService {
 //		default:
 //			break;
 //		}
-		MessagesSendFactpry messagesSendFactpry = new MessagesSendFactpryImpl();
-		
+	
 		MessagesSend messagesSend = (MessagesSend) messagesSendFactpry.createMessage(msgType);
 		textMessage = messagesSend.send(textMessage);
 		message = WxMessagesUtils.textToXml(textMessage);
 		return message;
 	}
 
-	
-	private TextMessage msgTypeByText(String content,String toUserName,String fromUserName, 
-			String wxcontent, String sendMsgType, TextMessage textMessage, 
-			long createTime) throws IOException{
-
-		sendMsgType = WxMessagesUtils.TEXT;
-		int suffx = content.indexOf("天气");
-		if (suffx>0) {
-			sendMsgType = WxMessagesUtils.TEXT;
-			String addr = content.substring(0, content.length()-2);
-			WeatherResult weatherResult = wXMessageService.getWeather(addr);		
-			wxcontent = weatherResult.getResult().getCity()+":"+weatherResult.getResult().getWeather()+",风力:"+weatherResult.getResult().getWindpower();
-			textMessage = new TextMessage(toUserName, fromUserName, WxMessagesUtils.TEXT, wxcontent, createTime);		
-		}else {
-			if (content.equals("帮助")) {
-				
-				wxcontent = textMenu();
-				textMessage = new TextMessage(toUserName, fromUserName, sendMsgType, wxcontent, createTime);
-				
-			}else if(content.equals("笑话")){
-				wxcontent = getJoke.getRandJoke().getContent();
-				textMessage = new TextMessage(toUserName, fromUserName, sendMsgType, wxcontent, createTime);						
-			}else {
-				
-				wxcontent = "您发送的消息是" + content + "(欢迎关注本订阅号,您还可以发送'笑话'关键字获取随机笑话哦,为您的聊天增添乐趣:-{))";
-				textMessage = new TextMessage(toUserName, fromUserName, sendMsgType, wxcontent, createTime);
-			}			
-		}	
-		return textMessage;
-	}
 	
 	private TextMessage msgTypeByEvent(String content,String toUserName,String fromUserName,
 			Map<String, String> map, String wxcontent, String sendMsgType, 

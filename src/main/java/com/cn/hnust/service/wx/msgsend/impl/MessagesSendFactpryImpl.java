@@ -1,5 +1,7 @@
 package com.cn.hnust.service.wx.msgsend.impl;
 
+import org.springframework.stereotype.Service;
+
 import com.cn.hnust.service.wx.enums.WxSendType;
 import com.cn.hnust.service.wx.msgsend.MessagesSend;
 import com.cn.hnust.service.wx.msgsend.MessagesSendFactpry;
@@ -9,6 +11,7 @@ import com.cn.hnust.service.wx.msgsend.MessagesSendFactpry;
 * @version 创建时间：2017年2月20日 下午8:51:46
 * 类说明
 */
+@Service
 public class MessagesSendFactpryImpl implements MessagesSendFactpry {
 
 	@Override

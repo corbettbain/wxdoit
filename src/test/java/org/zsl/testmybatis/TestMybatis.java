@@ -13,7 +13,6 @@ import com.alibaba.fastjson.JSON;
 import com.cn.hnust.pojo.TextMessage;
 import com.cn.hnust.pojo.User;
 import com.cn.hnust.service.IUserService;
-import com.cn.hnust.service.joke.factory.Gets;
 import com.cn.hnust.service.joke.factory.JokeFactory;
 import com.cn.hnust.service.joke.impl.GetJoke;
 import com.cn.hnust.service.wx.enums.WxSendType;
@@ -55,12 +54,7 @@ public class TestMybatis {
     
     @Test
     public void test3(){
-    	
-    	MessagesSendFactpry messagesSendFactpry = new MessagesSendFactpryImpl();
-		
-		MessagesSend messagesSend = (MessagesSend) messagesSendFactpry.createMessage("text");
-		
-		System.out.println(messagesSend.send(null));
-    	
+    	   	
+    	System.out.println(getJoke.getRandJoke().getContent());
     }
 }

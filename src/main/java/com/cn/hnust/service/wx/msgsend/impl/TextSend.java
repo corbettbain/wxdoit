@@ -4,10 +4,11 @@ import java.io.IOException;
 
 import javax.inject.Inject;
 
+import org.springframework.stereotype.Service;
+
 import com.cn.hnust.pojo.TextMessage;
 import com.cn.hnust.pojo.weather.WeatherResult;
 import com.cn.hnust.service.WeatherService;
-import com.cn.hnust.service.joke.factory.Gets;
 import com.cn.hnust.service.joke.factory.JokeFactory;
 import com.cn.hnust.service.joke.impl.GetJoke;
 import com.cn.hnust.service.wx.msgsend.MessagesSend;
@@ -18,19 +19,17 @@ import com.cn.hnust.wxmessages.WxMessagesUtils;
 * @version 创建时间：2017年2月20日 下午7:36:15
 * 类说明
 */
+@Service
 public class TextSend implements MessagesSend{
 
-	@Inject
 	private WeatherService weatherService;
+	private JokeFactory jokeFactory;
 	
 	@Override
 	public TextMessage send(TextMessage textMessage) {
 		textMessage.setMsgType(WxMessagesUtils.TEXT);
 		String content = textMessage.getContent();
 		String wxcontent = null;
-		String toUserName = textMessage.getFromUserName();
-		textMessage.setFromUserName(textMessage.getToUserName());
-		textMessage.setToUserName(toUserName);
 		int suffx = content.indexOf("天气");
 		if (suffx>0) {
 			String addr = content.substring(0, content.length()-2);
@@ -50,9 +49,7 @@ public class TextSend implements MessagesSend{
 				
 				
 			}else if(content.equals("笑话")){
-				JokeFactory jokeFactory = new Gets();
-				GetJoke getJoke = jokeFactory.getJokeResource();
-				wxcontent = getJoke.getRandJoke().getContent();
+				
 									
 			}else {
 				
@@ -74,4 +71,39 @@ public class TextSend implements MessagesSend{
 		stringBuffer.append("如需帮助请回复'帮助'");
 		return stringBuffer.toString();
 	}
+
+
+	/**
+	 * @return the weatherService
+	 */
+	public WeatherService getWeatherService() {
+		return weatherService;
+	}
+
+
+	/**
+	 * @param weatherService the weatherService to set
+	 */
+	public void setWeatherService(WeatherService weatherService) {
+		this.weatherService = weatherService;
+	}
+
+
+	/**
+	 * @return the jokeFactory
+	 */
+	public JokeFactory getJokeFactory() {
+		return jokeFactory;
+	}
+
+
+	/**
+	 * @param jokeFactory the jokeFactory to set
+	 */
+	public void setJokeFactory(JokeFactory jokeFactory) {
+		this.jokeFactory = jokeFactory;
+	}
+	
+	
+	
 }
