@@ -14,8 +14,9 @@ import com.cn.hnust.service.wx.msgsend.MessagesSendFactpry;
 @Service
 public class MessagesSendFactpryImpl implements MessagesSendFactpry {
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Object createMessage(String className) {
+	public <T> T  createMessage(String className) {
 		MessagesSend messagesSend = null;
 		try {
 			messagesSend = (MessagesSend) Class.forName(WxSendType.valueOf(className).getClassName()).newInstance();
@@ -29,7 +30,7 @@ public class MessagesSendFactpryImpl implements MessagesSendFactpry {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return messagesSend;
+		return (T) messagesSend;
 	}
 
 }

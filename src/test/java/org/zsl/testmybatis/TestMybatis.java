@@ -13,16 +13,18 @@ import com.alibaba.fastjson.JSON;
 import com.cn.hnust.pojo.TextMessage;
 import com.cn.hnust.pojo.User;
 import com.cn.hnust.service.IUserService;
+import com.cn.hnust.service.WeatherService;
 import com.cn.hnust.service.joke.factory.JokeFactory;
 import com.cn.hnust.service.joke.impl.GetJoke;
 import com.cn.hnust.service.wx.enums.WxSendType;
 import com.cn.hnust.service.wx.msgsend.MessagesSend;
 import com.cn.hnust.service.wx.msgsend.MessagesSendFactpry;
 import com.cn.hnust.service.wx.msgsend.impl.MessagesSendFactpryImpl;
+import com.cn.hnust.utils.SpringContextHolder;
+import com.cn.hnust.utils.SpringContextUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)     //表示继承了SpringJUnit4ClassRunner类
 @ContextConfiguration(locations = {"classpath:spring-mybatis.xml"})
-
 public class TestMybatis {
     private static Logger logger = Logger.getLogger(TestMybatis.class);
 //  private ApplicationContext ac = null;
@@ -54,7 +56,9 @@ public class TestMybatis {
     
     @Test
     public void test3(){
-    	   	
-    	System.out.println(getJoke.getRandJoke().getContent());
+    	JokeFactory jokeFactory = SpringContextHolder.getBean("getJoke");
+    	WeatherService weatherService =  SpringContextUtil.getBean("weatherServiceImpl");
+    	System.err.println(jokeFactory);
+    	System.err.println(weatherService);
     }
 }

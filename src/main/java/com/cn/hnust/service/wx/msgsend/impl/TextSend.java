@@ -11,7 +11,11 @@ import com.cn.hnust.pojo.weather.WeatherResult;
 import com.cn.hnust.service.WeatherService;
 import com.cn.hnust.service.joke.factory.JokeFactory;
 import com.cn.hnust.service.joke.impl.GetJoke;
+import com.cn.hnust.service.wx.enums.SystemDefaultToUserSendToResponseType;
 import com.cn.hnust.service.wx.msgsend.MessagesSend;
+import com.cn.hnust.service.wx.msgsend.ResponseMessageService;
+import com.cn.hnust.service.wx.msgsend.TextSendAbstract;
+import com.cn.hnust.utils.SpringContextUtil;
 import com.cn.hnust.wxmessages.WxMessagesUtils;
 
 /**
@@ -20,7 +24,7 @@ import com.cn.hnust.wxmessages.WxMessagesUtils;
 * 类说明
 */
 @Service
-public class TextSend implements MessagesSend{
+public class TextSend extends TextSendAbstract{
 
 	private WeatherService weatherService;
 	private JokeFactory jokeFactory;
@@ -29,35 +33,57 @@ public class TextSend implements MessagesSend{
 	public TextMessage send(TextMessage textMessage) {
 		textMessage.setMsgType(WxMessagesUtils.TEXT);
 		String content = textMessage.getContent();
-		String wxcontent = null;
-		int suffx = content.indexOf("天气");
-		if (suffx>0) {
-			String addr = content.substring(0, content.length()-2);
-			WeatherResult weatherResult = null;
-			try {
-				weatherResult = weatherService.getWeather(addr);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}		
-			wxcontent = weatherResult.getResult().getCity()+":"+weatherResult.getResult().getWeather()+",风力:"+weatherResult.getResult().getWindpower();
-					
-		}else {
-			if (content.equals("帮助")) {
-				
-				wxcontent = textMenu();
-				
-				
-			}else if(content.equals("笑话")){
-				
-									
+		/**
+		 * 判断用户发送是否为枚举中定义的类型
+		 */
+		SystemDefaultToUserSendToResponseType sendToResponseType = 
+				SystemDefaultToUserSendToResponseType.getEnumByValue(content);
+		if (sendToResponseType == null) {
+			int suffx = content.indexOf(SystemDefaultToUserSendToResponseType.
+					weather.getKeyWord());
+			if (suffx > 0) {
+				sendToResponseType = SystemDefaultToUserSendToResponseType.weather;
 			}else {
-				
-				wxcontent = "您发送的消息是" + content + "(欢迎关注本订阅号,您还可以发送'笑话'关键字获取随机笑话哦,为您的聊天增添乐趣:-{))";
-				
-			}			
-		}	
-		textMessage.setContent(wxcontent);
+				sendToResponseType = SystemDefaultToUserSendToResponseType.other;
+			}
+		}
+		
+		/**
+		 * 从spring 容器中获取bean
+		 */
+		ResponseMessageService responseMessageService = 
+				SpringContextUtil.getBean(sendToResponseType.getBeanName());
+		
+		 TextMessage messageSend = responseMessageService.messageResponse(textMessage);
+		
+//		int suffx = content.indexOf("天气");
+//		if (suffx>0) {
+//			String addr = content.substring(0, content.length()-2);
+//			WeatherResult weatherResult = null;
+//			try {
+//				weatherResult = weatherService.getWeather(addr);
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}		
+//			wxcontent = weatherResult.getResult().getCity()+":"+weatherResult.getResult().getWeather()+",风力:"+weatherResult.getResult().getWindpower();
+//					
+//		}else {
+//			if (content.equals("帮助")) {
+//				
+//				wxcontent = textMenu();
+//				
+//				
+//			}else if(content.equals("笑话")){
+//				wxcontent = jokeFactory.getRandJoke().getContent();
+//									
+//			}else {
+//				
+//				wxcontent = "您发送的消息是" + content + "(欢迎关注本订阅号,您还可以发送'笑话'关键字获取随机笑话哦,为您的聊天增添乐趣:-{))";
+//				
+//			}			
+//		}	
+//		textMessage.setContent(wxcontent);
 		return textMessage;
 	}
 
@@ -72,38 +98,13 @@ public class TextSend implements MessagesSend{
 		return stringBuffer.toString();
 	}
 
-
-	/**
-	 * @return the weatherService
-	 */
-	public WeatherService getWeatherService() {
-		return weatherService;
-	}
-
-
-	/**
-	 * @param weatherService the weatherService to set
-	 */
-	public void setWeatherService(WeatherService weatherService) {
-		this.weatherService = weatherService;
-	}
-
-
-	/**
-	 * @return the jokeFactory
-	 */
-	public JokeFactory getJokeFactory() {
-		return jokeFactory;
-	}
-
-
-	/**
-	 * @param jokeFactory the jokeFactory to set
-	 */
+	
 	public void setJokeFactory(JokeFactory jokeFactory) {
 		this.jokeFactory = jokeFactory;
 	}
 	
 	
-	
+	public void setWeatherService(WeatherService weatherService) {
+		this.weatherService = weatherService;
+	}
 }

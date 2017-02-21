@@ -6,7 +6,12 @@ package com.cn.hnust.service.wx.enums;
 */
 public enum WxSendType {
 
-	text("com.cn.hnust.service.wx.msgsend.impl.TextSend"),voice(""),vedio(""),image("");
+	text("com.cn.hnust.service.wx.msgsend.impl.TextSend"),
+	voice(""),
+	vedio(""),
+	image(""),
+	event(""),
+	;
 	
 	
 	private String className;

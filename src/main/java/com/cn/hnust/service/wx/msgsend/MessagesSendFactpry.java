@@ -6,5 +6,5 @@ package com.cn.hnust.service.wx.msgsend;
 */
 public interface MessagesSendFactpry {
 
-	Object createMessage(String className);
+	<T> T createMessage(String className);
 }

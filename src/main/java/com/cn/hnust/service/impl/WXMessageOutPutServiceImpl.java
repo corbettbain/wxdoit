@@ -19,6 +19,7 @@ import com.cn.hnust.service.joke.impl.GetJoke;
 import com.cn.hnust.service.wx.enums.WxSendType;
 import com.cn.hnust.service.wx.msgsend.MessagesSend;
 import com.cn.hnust.service.wx.msgsend.MessagesSendFactpry;
+import com.cn.hnust.service.wx.msgsend.TextSendAbstract;
 import com.cn.hnust.service.wx.msgsend.impl.MessagesSendFactpryImpl;
 import com.cn.hnust.wxmessages.WxMessagesUtils;
 
@@ -30,7 +31,7 @@ import com.cn.hnust.wxmessages.WxMessagesUtils;
 public class WXMessageOutPutServiceImpl implements WXMessageOutPutService {
 	
 	@Inject
-	private WeatherService wXMessageService;
+	private WeatherService weatherService;
 	
 	@Inject
 	private JokeFactory jokeFactory;
@@ -53,18 +54,9 @@ public class WXMessageOutPutServiceImpl implements WXMessageOutPutService {
 		long createTime = new Date().getTime();
 		
 		textMessage = new TextMessage(toUserName, fromUserName, sendMsgType, content, createTime);
-//		switch (msgType) {
-//		case WxMessagesUtils.TEXT:
-//			textMessage = msgTypeByText(content, toUserName, fromUserName,wxcontent,sendMsgType,textMessage,createTime);
-//			break;
-//		case WxMessagesUtils.EVENT:
-//			textMessage = msgTypeByEvent( content, toUserName, fromUserName,map,wxcontent,sendMsgType,textMessage,createTime);
-//			break;
-//		default:
-//			break;
-//		}
-	
-		MessagesSend messagesSend = (MessagesSend) messagesSendFactpry.createMessage(msgType);
+
+		TextSendAbstract messagesSend =  messagesSendFactpry.createMessage(msgType);
+		messagesSend.setWeatherService(weatherService);
 		textMessage = messagesSend.send(textMessage);
 		message = WxMessagesUtils.textToXml(textMessage);
 		return message;
