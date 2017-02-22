@@ -1,18 +1,11 @@
 package com.cn.hnust.service.wx.msgsend.impl;
 
-import java.io.IOException;
-
-import javax.inject.Inject;
-
 import org.springframework.stereotype.Service;
 
 import com.cn.hnust.pojo.TextMessage;
-import com.cn.hnust.pojo.weather.WeatherResult;
 import com.cn.hnust.service.WeatherService;
 import com.cn.hnust.service.joke.factory.JokeFactory;
-import com.cn.hnust.service.joke.impl.GetJoke;
 import com.cn.hnust.service.wx.enums.SystemDefaultToUserSendToResponseType;
-import com.cn.hnust.service.wx.msgsend.MessagesSend;
 import com.cn.hnust.service.wx.msgsend.ResponseMessageService;
 import com.cn.hnust.service.wx.msgsend.TextSendAbstract;
 import com.cn.hnust.utils.SpringContextUtil;
@@ -26,7 +19,9 @@ import com.cn.hnust.wxmessages.WxMessagesUtils;
 @Service
 public class TextSend extends TextSendAbstract{
 
+	@SuppressWarnings("unused")
 	private WeatherService weatherService;
+	@SuppressWarnings("unused")
 	private JokeFactory jokeFactory;
 	
 	@Override
@@ -42,6 +37,8 @@ public class TextSend extends TextSendAbstract{
 			int suffx = content.indexOf(SystemDefaultToUserSendToResponseType.
 					weather.getKeyWord());
 			if (suffx > 0) {
+				String addr = content.substring(0, content.length()-2);
+				textMessage.setContent(addr);
 				sendToResponseType = SystemDefaultToUserSendToResponseType.weather;
 			}else {
 				sendToResponseType = SystemDefaultToUserSendToResponseType.other;
@@ -84,19 +81,9 @@ public class TextSend extends TextSendAbstract{
 //			}			
 //		}	
 //		textMessage.setContent(wxcontent);
-		return textMessage;
+		return messageSend;
 	}
 
-	
-	private String textMenu(){
-		StringBuffer stringBuffer = new StringBuffer();
-		stringBuffer.append("欢迎关注快乐驿站,请按照菜单提示进行操作:").append("           ");
-		stringBuffer.append("1.任意回复,开始学你说话小游戏^.^").append("      ");
-		stringBuffer.append("2.获取天气详情,回复格式:地址+'天气'.例如'崇仁天气'").append("      ");
-		stringBuffer.append("3.获取笑话大全,回复格式:'笑话'").append("      ");
-		stringBuffer.append("如需帮助请回复'帮助'");
-		return stringBuffer.toString();
-	}
 
 	
 	public void setJokeFactory(JokeFactory jokeFactory) {

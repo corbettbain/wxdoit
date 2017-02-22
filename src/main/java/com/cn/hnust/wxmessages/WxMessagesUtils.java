@@ -14,18 +14,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import javax.json.Json;
-import javax.json.JsonObject;
 import javax.servlet.http.HttpServletRequest;
 
-import org.codehaus.jackson.map.util.JSONPObject;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 import com.alibaba.fastjson.JSONObject;
-import com.cn.hnust.pojo.weather.WeatherResult;
 import com.thoughtworks.xstream.XStream;
 
 /**
@@ -217,6 +213,7 @@ public class WxMessagesUtils {
 	}
 
 	// 将map型转为请求参数型
+	@SuppressWarnings("rawtypes")
 	public static String urlencode(Map<String, Object> param) {
 		StringBuilder sb = new StringBuilder();
 		for (Map.Entry i : param.entrySet()) {

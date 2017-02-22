@@ -2,7 +2,6 @@ package com.cn.hnust.accesstoken;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import org.apache.log4j.Logger;
 

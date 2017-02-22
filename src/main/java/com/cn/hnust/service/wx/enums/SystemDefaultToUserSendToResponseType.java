@@ -1,8 +1,5 @@
 package com.cn.hnust.service.wx.enums;
 
-import com.cn.hnust.service.WeatherService;
-import com.cn.hnust.service.impl.WeatherServiceImpl;
-
 /**
 * @author zn
 * @version 创建时间：2017年2月21日 下午5:04:07
