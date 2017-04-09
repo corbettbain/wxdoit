@@ -12,7 +12,7 @@ import com.cn.hnust.service.WXMessageOutPutService;
 
 /**
  * @author zn
- * @version ´´½¨Ê±¼ä£º2017Äê1ÔÂ14ÈÕ ÉÏÎç12:15:06 ÀàËµÃ÷
+ * @version ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£º2017ï¿½ï¿½1ï¿½ï¿½14ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½12:15:06 ï¿½ï¿½Ëµï¿½ï¿½
  */
 @Controller
 @RequestMapping("/wx")
@@ -44,9 +44,27 @@ public class CheckWXController {
 	@ResponseBody
 	public String checkwx(HttpServletRequest request, HttpServletResponse response) {
 		String message = null;
+		response.setCharacterEncoding("UTF-8");
 		try {
 			message = wXMessageOutPutService.outPutToWx(request);
+//			response.getWriter().print(message);
 			return message;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	
+	@RequestMapping("/checkwxs")
+	@ResponseBody
+	public String checkwxs(HttpServletRequest request, HttpServletResponse response) {
+		String message = null;
+		response.setCharacterEncoding("UTF-8");
+		try {
+			
+			return "é¡ºä¸°åˆ°ä»˜çš„";
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

@@ -8,10 +8,10 @@ import com.cn.hnust.service.WXCheckService;
 import com.cn.hnust.utils.CommUtils;
 
 /**
-* @author zn
-* @version ´´½¨Ê±¼ä£º2017Äê1ÔÂ14ÈÕ ÉÏÎç12:02:50
-* ÀàËµÃ÷
-*/
+ * 
+ * @author å‘¨å® - 2017å¹´4æœˆ9æ—¥ - ä¸‹åˆ10:56:45 - é¡¹ç›®:wxdoit - åŒ…å:com.cn.hnust.service.impl
+ *
+ */
 @Service
 public class WXCheckServiceImpl implements WXCheckService {
 
