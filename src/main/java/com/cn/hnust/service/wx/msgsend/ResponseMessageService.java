@@ -1,12 +1,14 @@
 package com.cn.hnust.service.wx.msgsend;
 
+import java.io.IOException;
+
 import com.cn.hnust.pojo.TextMessage;
 /**
-* @author zn
-* @version ´´½¨Ê±¼ä£º2017Äê2ÔÂ21ÈÕ ÏÂÎç5:23:01
-* ÀàËµÃ÷
-*/
+ * 
+ * @author å‘¨å® - 2017å¹´4æœˆ9æ—¥ - ä¸‹åˆ8:51:35 - é¡¹ç›®:wxdoit - åŒ…å:com.cn.hnust.service.wx.msgsend
+ *
+ */
 public interface ResponseMessageService {
 
-	TextMessage messageResponse(TextMessage textMessage);
+	TextMessage messageResponse(TextMessage textMessage) throws IOException;
 }

@@ -1,11 +1,11 @@
-package com.cn.hnust.service;
+package com.cn.hnust.service.weather;
 import java.io.IOException;
 
 import com.cn.hnust.pojo.weather.WeatherResult;
 /**
 * @author zn
-* @version 创建时间：2017年1月18日 下午4:08:43
-* 类说明
+* @version 锟斤拷锟斤拷时锟戒：2017锟斤拷1锟斤拷18锟斤拷 锟斤拷锟斤拷4:08:43
+* 锟斤拷说锟斤拷
 */
 public interface WeatherService {
 

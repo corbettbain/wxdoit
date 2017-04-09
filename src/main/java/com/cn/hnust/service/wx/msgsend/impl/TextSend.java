@@ -1,10 +1,10 @@
 package com.cn.hnust.service.wx.msgsend.impl;
 
+import java.io.IOException;
+
 import org.springframework.stereotype.Service;
 
 import com.cn.hnust.pojo.TextMessage;
-import com.cn.hnust.service.WeatherService;
-import com.cn.hnust.service.joke.factory.JokeFactory;
 import com.cn.hnust.service.wx.enums.SystemDefaultToUserSendToResponseType;
 import com.cn.hnust.service.wx.msgsend.ResponseMessageService;
 import com.cn.hnust.service.wx.msgsend.TextSendAbstract;
@@ -12,86 +12,42 @@ import com.cn.hnust.utils.SpringContextUtil;
 import com.cn.hnust.wxmessages.WxMessagesUtils;
 
 /**
-* @author zn
-* @version ´´½¨Ê±¼ä£º2017Äê2ÔÂ20ÈÕ ÏÂÎç7:36:15
-* ÀàËµÃ÷
-*/
+ * 
+ * @author å‘¨å® - 2017å¹´4æœˆ9æ—¥ - ä¸‹åˆ8:20:13 - é¡¹ç›®:wxdoit - åŒ…å:com.cn.hnust.service.wx.msgsend.impl
+ *
+ */
 @Service
 public class TextSend extends TextSendAbstract{
 
-	@SuppressWarnings("unused")
-	private WeatherService weatherService;
-	@SuppressWarnings("unused")
-	private JokeFactory jokeFactory;
-	
 	@Override
-	public TextMessage send(TextMessage textMessage) {
+	public TextMessage send(TextMessage textMessage) throws IOException {
 		textMessage.setMsgType(WxMessagesUtils.TEXT);
-		String content = textMessage.getContent();
-		/**
-		 * ÅĞ¶ÏÓÃ»§·¢ËÍÊÇ·ñÎªÃ¶¾ÙÖĞ¶¨ÒåµÄÀàĞÍ
-		 */
-		SystemDefaultToUserSendToResponseType sendToResponseType = 
-				SystemDefaultToUserSendToResponseType.getEnumByValue(content);
-		if (sendToResponseType == null) {
-			int suffx = content.indexOf(SystemDefaultToUserSendToResponseType.
-					weather.getKeyWord());
-			if (suffx > 0) {
-				String addr = content.substring(0, content.length()-2);
-				textMessage.setContent(addr);
-				sendToResponseType = SystemDefaultToUserSendToResponseType.weather;
-			}else {
-				sendToResponseType = SystemDefaultToUserSendToResponseType.other;
-			}
+		String contents = textMessage.getContent();
+		String beanName = "";
+		String content = "";
+		if (contents.indexOf(" ") > 0) {
+			content = contents.substring(0,contents.indexOf(" "));
+			beanName = contents.substring(contents.indexOf(" ") + 1, contents.length());
+		}else {
+			beanName = contents;
+			content = contents;
 		}
 		
-		/**
-		 * ´Óspring ÈİÆ÷ÖĞ»ñÈ¡bean
-		 */
+		textMessage.setContent(content);
+		
+		SystemDefaultToUserSendToResponseType sendToResponseType = 
+				SystemDefaultToUserSendToResponseType.getEnumByValue(beanName);
+
+		if (sendToResponseType == null) {
+			return null;
+		}
+		
 		ResponseMessageService responseMessageService = 
 				SpringContextUtil.getBean(sendToResponseType.getBeanName());
 		
 		 TextMessage messageSend = responseMessageService.messageResponse(textMessage);
 		
-//		int suffx = content.indexOf("ÌìÆø");
-//		if (suffx>0) {
-//			String addr = content.substring(0, content.length()-2);
-//			WeatherResult weatherResult = null;
-//			try {
-//				weatherResult = weatherService.getWeather(addr);
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}		
-//			wxcontent = weatherResult.getResult().getCity()+":"+weatherResult.getResult().getWeather()+",·çÁ¦:"+weatherResult.getResult().getWindpower();
-//					
-//		}else {
-//			if (content.equals("°ïÖú")) {
-//				
-//				wxcontent = textMenu();
-//				
-//				
-//			}else if(content.equals("Ğ¦»°")){
-//				wxcontent = jokeFactory.getRandJoke().getContent();
-//									
-//			}else {
-//				
-//				wxcontent = "Äú·¢ËÍµÄÏûÏ¢ÊÇ" + content + "(»¶Ó­¹Ø×¢±¾¶©ÔÄºÅ,Äú»¹¿ÉÒÔ·¢ËÍ'Ğ¦»°'¹Ø¼ü×Ö»ñÈ¡Ëæ»úĞ¦»°Å¶,ÎªÄúµÄÁÄÌìÔöÌíÀÖÈ¤:-{))";
-//				
-//			}			
-//		}	
-//		textMessage.setContent(wxcontent);
 		return messageSend;
 	}
 
-
-	
-	public void setJokeFactory(JokeFactory jokeFactory) {
-		this.jokeFactory = jokeFactory;
-	}
-	
-	
-	public void setWeatherService(WeatherService weatherService) {
-		this.weatherService = weatherService;
-	}
 }

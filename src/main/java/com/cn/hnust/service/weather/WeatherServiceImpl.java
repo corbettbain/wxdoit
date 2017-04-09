@@ -1,4 +1,4 @@
-package com.cn.hnust.service.impl;
+package com.cn.hnust.service.weather;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -8,12 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cn.hnust.pojo.weather.WeatherResult;
-import com.cn.hnust.service.WeatherService;
 import com.cn.hnust.wxmessages.WxMessagesUtils;
 
 /**
  * @author zn
- * @version ´´½¨Ê±¼ä£º2017Äê1ÔÂ18ÈÕ ÏÂÎç4:13:54 ÀàËµÃ÷
+ * @version ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£º2017ï¿½ï¿½1ï¿½ï¿½18ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½4:13:54 ï¿½ï¿½Ëµï¿½ï¿½
  */
 @Service
 public class WeatherServiceImpl implements WeatherService {

@@ -7,10 +7,10 @@ import com.cn.hnust.service.wx.enums.WxSendType;
 import com.cn.hnust.service.wx.msgsend.ResponseMessageService;
 
 /**
-* @author zn
-* @version ´´½¨Ê±¼ä£º2017Äê2ÔÂ21ÈÕ ÏÂÎç5:36:29
-* ÀàËµÃ÷
-*/
+ * 
+ * @author å‘¨å® - 2017å¹´4æœˆ9æ—¥ - ä¸‹åˆ8:55:23 - é¡¹ç›®:wxdoit - åŒ…å:com.cn.hnust.service.wx.msgsend.impl
+ *
+ */
 @Service
 public class HelpSend implements ResponseMessageService {
 
@@ -27,11 +27,7 @@ public class HelpSend implements ResponseMessageService {
 	
 	private String textMenu(){
 		StringBuffer stringBuffer = new StringBuffer();
-		stringBuffer.append("»¶Ó­¹Ø×¢¿ìÀÖæäÕ¾,Çë°´ÕÕ²Ëµ¥ÌáÊ¾½øĞĞ²Ù×÷:").append("           ");
-		stringBuffer.append("1.ÈÎÒâ»Ø¸´,¿ªÊ¼Ñ§ÄãËµ»°Ğ¡ÓÎÏ·^.^").append("      ");
-		stringBuffer.append("2.»ñÈ¡ÌìÆøÏêÇé,»Ø¸´¸ñÊ½:µØÖ·+'ÌìÆø'.ÀıÈç'³çÈÊÌìÆø'").append("      ");
-		stringBuffer.append("3.»ñÈ¡Ğ¦»°´óÈ«,»Ø¸´¸ñÊ½:'Ğ¦»°'").append("      ");
-		stringBuffer.append("ÈçĞè°ïÖúÇë»Ø¸´'°ïÖú'");
+		stringBuffer.append("æ ¼å¼ä¸º:åœ°å+ ç©ºæ ¼ + å¤©æ°”-æŸ¥è¯¢å¤©æ°”");
 		return stringBuffer.toString();
 	}
 }

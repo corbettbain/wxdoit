@@ -12,20 +12,17 @@ import org.springframework.stereotype.Service;
 
 import com.cn.hnust.pojo.TextMessage;
 import com.cn.hnust.service.WXMessageOutPutService;
-import com.cn.hnust.service.WeatherService;
 import com.cn.hnust.service.wx.msgsend.MessagesSendFactpry;
 import com.cn.hnust.service.wx.msgsend.TextSendAbstract;
 import com.cn.hnust.wxmessages.WxMessagesUtils;
 
 /**
- * @author zn
- * @version ´´½¨Ê±¼ä£º2017Äê1ÔÂ18ÈÕ ÏÂÎç8:00:55 ÀàËµÃ÷
+ * 
+ * @author å‘¨å® - 2017å¹´4æœˆ9æ—¥ - ä¸‹åˆ8:52:26 - é¡¹ç›®:wxdoit - åŒ…å:com.cn.hnust.service.impl
+ *
  */
 @Service
-public class WXMessageOutPutServiceImpl implements WXMessageOutPutService {
-	
-	@Inject
-	private WeatherService weatherService;
+public class WXMessageOutPutServiceImpl implements WXMessageOutPutService {	
 
 	@Inject
 	private MessagesSendFactpry messagesSendFactpry;
@@ -46,8 +43,10 @@ public class WXMessageOutPutServiceImpl implements WXMessageOutPutService {
 		textMessage = new TextMessage(toUserName, fromUserName, sendMsgType, content, createTime);
 
 		TextSendAbstract messagesSend =  messagesSendFactpry.createMessage(msgType);
-		messagesSend.setWeatherService(weatherService);
 		textMessage = messagesSend.send(textMessage);
+		if (textMessage == null) {
+			return null;
+		}
 		message = WxMessagesUtils.textToXml(textMessage);
 		return message;
 	}

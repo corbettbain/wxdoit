@@ -8,14 +8,14 @@ import org.springframework.stereotype.Service;
 
 import com.cn.hnust.pojo.TextMessage;
 import com.cn.hnust.pojo.weather.WeatherResult;
-import com.cn.hnust.service.WeatherService;
+import com.cn.hnust.service.weather.WeatherService;
 import com.cn.hnust.service.wx.enums.WxSendType;
 import com.cn.hnust.service.wx.msgsend.ResponseMessageService;
 
 /**
 * @author zn
-* @version ´´½¨Ê±¼ä£º2017Äê2ÔÂ21ÈÕ ÏÂÎç5:35:08
-* ÀàËµÃ÷
+* @version ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£º2017ï¿½ï¿½2ï¿½ï¿½21ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½5:35:08
+* ï¿½ï¿½Ëµï¿½ï¿½
 */
 @Service
 public class WeatherSend implements ResponseMessageService {
@@ -24,18 +24,15 @@ public class WeatherSend implements ResponseMessageService {
 	private WeatherService weatherService;
 	
 	@Override
-	public TextMessage messageResponse(TextMessage textMessage) {
+	public TextMessage messageResponse(TextMessage textMessage) throws IOException {
 
 
 		String city = textMessage.getContent();
 		WeatherResult weatherResult = null;
-		try {
-			weatherResult = weatherService.getWeather(city);
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		textMessage.setContent(weatherResult.getResult().getCity()+":"+weatherResult.getResult().getWeather()+",·çÁ¦:"+weatherResult.getResult().getWindpower());
+
+		weatherResult = weatherService.getWeather(city);
+
+		textMessage.setContent(weatherResult.getResult().getCity()+":"+weatherResult.getResult().getWeather()+",é£ŽåŠ›:"+weatherResult.getResult().getWindpower());
 		textMessage.setMsgType(WxSendType.text.toString());
 		
 		return textMessage;

@@ -10,10 +10,10 @@ import com.cn.hnust.service.wx.enums.WxSendType;
 import com.cn.hnust.service.wx.msgsend.ResponseMessageService;
 
 /**
-* @author zn
-* @version ´´½¨Ê±¼ä£º2017Äê2ÔÂ21ÈÕ ÏÂÎç5:26:42
-* ÀàËµÃ÷
-*/
+ * 
+ * @author å‘¨å® - 2017å¹´4æœˆ9æ—¥ - ä¸‹åˆ8:51:46 - é¡¹ç›®:wxdoit - åŒ…å:com.cn.hnust.service.wx.msgsend.impl
+ *
+ */
 @Service
 public class JokeSend implements ResponseMessageService {
 

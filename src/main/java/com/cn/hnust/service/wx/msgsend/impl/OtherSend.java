@@ -13,7 +13,7 @@ public class OtherSend implements ResponseMessageService {
 	public TextMessage messageResponse(TextMessage textMessage) {
 		
 		String content = textMessage.getContent();
-		textMessage.setContent("Äú·¢ËÍµÄÏûÏ¢ÊÇ" + content + "(»¶Ó­¹Ø×¢±¾¶©ÔÄºÅ,Äú»¹¿ÉÒÔ·¢ËÍ'Ğ¦»°'¹Ø¼ü×Ö»ñÈ¡Ëæ»úĞ¦»°Å¶,ÎªÄúµÄÁÄÌìÔöÌíÀÖÈ¤:-{))");
+		textMessage.setContent("ä½ å‘é€çš„ä¿¡æ¯ä¸º" + content + "!");
 		textMessage.setMsgType(WxSendType.text.toString());
 		return textMessage;
 	}

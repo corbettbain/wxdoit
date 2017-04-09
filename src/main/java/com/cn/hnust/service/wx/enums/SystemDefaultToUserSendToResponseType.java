@@ -1,16 +1,16 @@
 package com.cn.hnust.service.wx.enums;
 
 /**
-* @author zn
-* @version ´´½¨Ê±¼ä£º2017Äê2ÔÂ21ÈÕ ÏÂÎç5:04:07
-* ÀàËµÃ÷
-*/
+ * å›å¤å­—å…¸
+ * @author å‘¨å® - 2017å¹´4æœˆ7æ—¥ - ä¸‹åˆ10:56:53 - é¡¹ç›®:wxdoit - åŒ…å:com.cn.hnust.service.wx.enums
+ *
+ */
 public enum SystemDefaultToUserSendToResponseType {
 
-	help("°ïÖú","helpSend"),
-	joke("Ğ¦»°","jokeSend"),
-	weather("ÌìÆø","weatherSend"),
-	other("ÆäËû","otherSend")
+	help("å¸®åŠ©","helpSend"),
+	joke("ç¬‘è¯","jokeSend"),
+	weather("å¤©æ°”","weatherSend"),
+	other("å…¶ä»–","otherSend")
 	;
 	
 	private String beanName;

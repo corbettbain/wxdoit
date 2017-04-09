@@ -13,9 +13,9 @@ import com.alibaba.fastjson.JSON;
 import com.cn.hnust.pojo.TextMessage;
 import com.cn.hnust.pojo.User;
 import com.cn.hnust.service.IUserService;
-import com.cn.hnust.service.WeatherService;
 import com.cn.hnust.service.joke.factory.JokeFactory;
 import com.cn.hnust.service.joke.impl.GetJoke;
+import com.cn.hnust.service.weather.WeatherService;
 import com.cn.hnust.service.wx.enums.WxSendType;
 import com.cn.hnust.service.wx.msgsend.MessagesSend;
 import com.cn.hnust.service.wx.msgsend.MessagesSendFactpry;
@@ -23,7 +23,7 @@ import com.cn.hnust.service.wx.msgsend.impl.MessagesSendFactpryImpl;
 import com.cn.hnust.utils.SpringContextHolder;
 import com.cn.hnust.utils.SpringContextUtil;
 
-@RunWith(SpringJUnit4ClassRunner.class)     //±íÊ¾¼Ì³ÐÁËSpringJUnit4ClassRunnerÀà
+@RunWith(SpringJUnit4ClassRunner.class)     //ï¿½ï¿½Ê¾ï¿½Ì³ï¿½ï¿½ï¿½SpringJUnit4ClassRunnerï¿½ï¿½
 @ContextConfiguration(locations = {"classpath:spring-mybatis.xml"})
 public class TestMybatis {
     private static Logger logger = Logger.getLogger(TestMybatis.class);
@@ -45,7 +45,7 @@ public class TestMybatis {
     public void test1() {
         User user = userService.getUserById(1);
         // System.out.println(user.getUserName());
-        // logger.info("Öµ£º"+user.getUserName());
+        // logger.info("Öµï¿½ï¿½"+user.getUserName());
         logger.info(JSON.toJSONString(user));
     }
     
@@ -56,9 +56,9 @@ public class TestMybatis {
     
     @Test
     public void test3(){
-    	JokeFactory jokeFactory = SpringContextHolder.getBean("getJoke");
-    	WeatherService weatherService =  SpringContextUtil.getBean("weatherServiceImpl");
-    	System.err.println(jokeFactory);
-    	System.err.println(weatherService);
+    	 String ssString = "asdasds tianqi";
+    	 System.err.println(ssString.indexOf(" "));
+    	 System.out.println(ssString.substring(0, ssString.indexOf(" ")));
+    	 System.out.println(ssString.substring(ssString.indexOf(" ")+1,ssString.length()));
     }
 }
